@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import QrPage from "./QrPage.jsx";
 
 const coffeImageModules = import.meta.glob(
   "./assets/Coffe/*.{png,jpg,jpeg,webp}",
@@ -357,6 +358,18 @@ const tagCls   = { "Best Seller":"t-bs","Popular":"t-pop","New":"t-new","Healthy
 
 function formatIDR(p){ return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",minimumFractionDigits:0}).format(p); }
 
+function usePathname() {
+  const [path, setPath] = useState(() => window.location.pathname);
+
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname);
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  return path;
+}
+
 /* ── MODAL ── */
 function Modal({ item, onClose }){
   useEffect(()=>{
@@ -432,7 +445,7 @@ function Card({ item, delay, onClick }){
 }
 
 /* ── MAIN ── */
-export default function CafeMenu(){
+function CafeMenu(){
   const [tab, setTab]       = useState("semua");
   const [q, setQ]           = useState("");
   const [selected, setSel]  = useState(null);
@@ -525,4 +538,14 @@ export default function CafeMenu(){
       {selected && <Modal item={selected} onClose={()=>setSel(null)}/>}
     </div>
   );
+}
+
+export default function App() {
+  const path = usePathname();
+
+  if (path === "/qr") {
+    return <QrPage />;
+  }
+
+  return <CafeMenu />;
 }

@@ -1,5 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
 
+const coffeImageModules = import.meta.glob(
+  "./assets/Coffe/*.{png,jpg,jpeg,webp}",
+  { eager: true, import: "default" }
+);
+
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,7 +19,7 @@ const STYLES = `
 
   /* HEADER */
   .hd { background:var(--warm); border-bottom:1px solid var(--sand2); padding:0 16px; position:sticky; top:0; z-index:30; }
-  .hd-in { max-width:1040px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:64px; gap:12px; }
+  .hd-in { width:100%; max-width:none; margin:0; display:flex; align-items:center; justify-content:space-between; height:64px; gap:12px; }
   .logo-name { font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:600; color:var(--brown-d); letter-spacing:.5px; line-height:1; }
   .logo-sub { font-size:9px; font-weight:300; color:var(--muted); letter-spacing:2.5px; text-transform:uppercase; margin-top:3px; }
   .sw { flex:1; max-width:340px; position:relative; }
@@ -38,7 +43,7 @@ const STYLES = `
 
   /* TABS */
   .tb-wrap { background:var(--warm); border-bottom:1px solid var(--sand2); position:sticky; top:64px; z-index:20; }
-  .tb { max-width:1040px; margin:0 auto; display:flex; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
+  .tb { width:100%; max-width:none; margin:0; display:flex; overflow-x:auto; padding:0 16px; scrollbar-width:none; }
   .tb::-webkit-scrollbar { display:none; }
   .tbb { border:none; background:none; cursor:pointer; padding:13px 14px; font-size:12.5px;
     font-family:'DM Sans',sans-serif; font-weight:400; color:var(--muted);
@@ -50,7 +55,7 @@ const STYLES = `
   .tbb.act .tbc { background:var(--acc); color:#fff; }
 
   /* MAIN */
-  .main { max-width:1040px; margin:0 auto; padding:28px 16px 64px; }
+  .main { width:100%; max-width:none; margin:0; padding:28px 16px 64px; }
   .sh { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px; padding-bottom:12px; border-bottom:1px solid var(--sand2); }
   .st { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:600; color:var(--brown-d); }
   .ss { font-size:11.5px; color:var(--muted); font-weight:300; }
@@ -176,32 +181,175 @@ const categories = [
   { key:"snack",      label:"Snack",      icon:"🥐" },
 ];
 
-const menuItems = [
-  { id:1,  cat:"coffee",     name:"Signature Espresso",         desc:"Single origin Ethiopia, double shot, crema tebal dan aroma floral khas yang memanjakan hidung",                   price:28000, tag:"Best Seller", },
-  { id:2,  cat:"coffee",     name:"Iced Caramel Latte",         desc:"Susu oat segar, sirup karamel buatan sendiri, sea salt foam lembut di atasnya",                                  price:42000, tag:"Popular",    },
-  { id:3,  cat:"coffee",     name:"Dirty Matcha",               desc:"Matcha ceremonial grade dari Uji, ditambah espresso shot yang intens dan menggiurkan",                           price:45000, tag:"New",        },
-  { id:4,  cat:"coffee",     name:"Cold Brew Float",            desc:"Cold brew 18 jam yang smooth, es krim vanilla bean premium, topping whipped cream segar",                       price:48000, tag:null,         },
-  { id:5,  cat:"coffee",     name:"Rose Cortado",               desc:"Espresso ristretto, air mawar segar, susu full cream steamed lembut — elegan di setiap tegukan",                price:38000, tag:"Spesial",    },
-  { id:6,  cat:"coffee",     name:"Hazelnut Cappuccino",        desc:"Double shot espresso, busa susu lembut halus sempurna, sirup hazelnut premium Italia",                          price:40000, tag:"Popular",    },
-  { id:7,  cat:"non-coffee", name:"Thai Milk Tea",              desc:"Teh Thailand asli blend khusus, susu kental manis, tapioca pearl segar kenyal menyenangkan",                    price:35000, tag:"Popular",    },
-  { id:8,  cat:"non-coffee", name:"Yuzu Lemonade",              desc:"Yuzu segar diperas langsung, sparkling water, madu asli, daun mint peppermint menyegarkan",                    price:32000, tag:"Refreshing", },
-  { id:9,  cat:"non-coffee", name:"Taro Latte",                 desc:"Talas Okinawa pilihan, susu oat, swirl butterfly pea yang cantik berwarna ungu natural",                        price:42000, tag:"New",        },
-  { id:10, cat:"non-coffee", name:"Mango Lassi Smoothie",       desc:"Mangga Alphonso pilihan terbaik, yogurt Greek creamy, kapulaga, kelopak mawar harum",                           price:40000, tag:null,         },
-  { id:11, cat:"non-coffee", name:"Strawberry Hojicha",         desc:"Hojicha panggang beraroma kacang yang khas, susu segar, coulis stroberi alami segar merah",                     price:43000, tag:"New",        },
-  { id:12, cat:"food",       name:"Avocado Toast Deluxe",       desc:"Sourdough artisan panggang, alpukat smashed bumbu lemon, telur poached sempurna, micro herbs segar",            price:65000, tag:"Best Seller", },
-  { id:13, cat:"food",       name:"Truffle Mushroom Bruschetta",desc:"Ciabatta renyah garing, jamur liar tumis bawang putih, truffle oil mewah, parmesan shaved tipis",               price:58000, tag:null,         },
-  { id:14, cat:"food",       name:"Acai Power Bowl",            desc:"Acai blended kental, granola crunchy buatan sendiri, buah segar musiman, kelapa parut, madu lebah hutan",       price:72000, tag:"Healthy",    },
-  { id:15, cat:"food",       name:"Croissant Sandwich",         desc:"Croissant mentega segar dipanggang, turkey ham premium, brie leleh creamy, saus dijon pedas manis",             price:55000, tag:"Popular",    },
-  { id:16, cat:"food",       name:"Nasi Goreng Truffle",        desc:"Nasi wangi premium dimasak wajan panas, truffle oil mewah, telur mata sapi runny, acar timun segar",            price:68000, tag:"Spesial",    },
-  { id:17, cat:"dessert",    name:"Burnt Basque Cheesecake",    desc:"San Sebastian style autentik, bagian tengah creamy bergetar lembut, permukaan caramelized sempurna kehitaman",  price:52000, tag:"Best Seller", },
-  { id:18, cat:"dessert",    name:"Tiramisu Jar",               desc:"Ladyfinger savoiardi ber-espresso kuat, krim mascarpone lembut mengembang, taburan cocoa premium Valrhona",     price:48000, tag:"Popular",    },
-  { id:19, cat:"dessert",    name:"Matcha Opera Cake",          desc:"Lapisan sponge matcha halus bergantian, ganache dark chocolate 70% premium, butter cream matcha",               price:55000, tag:"New",        },
-  { id:20, cat:"dessert",    name:"Crème Brûlée",               desc:"Custard vanilla pod Madagaskar klasik Prancis, kulit gula karamel renyah tipis dibakar langsung",               price:45000, tag:null,         },
-  { id:21, cat:"snack",      name:"Butter Croissant",           desc:"Berlapis mentega Prancis AOP pilihan, fermentasi 3 hari, dipanggang segar hangat setiap pagi hari",             price:32000, tag:"Best Seller", },
-  { id:22, cat:"snack",      name:"Cheese Scone",               desc:"Scone hangat mengembang, keju cheddar matured tajam, krim clotted, selai stroberi buatan rumah",                price:28000, tag:null,         },
-  { id:23, cat:"snack",      name:"Banana Walnut Muffin",       desc:"Pisang cavendish matang manis, walnut panggang renyah, streusel brown sugar kasar bertekstur di atas",          price:25000, tag:"Popular",    },
-  { id:24, cat:"snack",      name:"Smoked Salmon Bagel",        desc:"Bagel sesame empuk, salmon smoked cold-smoked, cream cheese lembut, caper, dill segar harum",                  price:58000, tag:"Spesial",    },
-];
+function fileNameFromPath(p) {
+  const last = p.split("/").pop() || "";
+  return last.replace(/\.[^.]+$/, "");
+}
+
+const menuMetaByFileName = {
+  "espresso": {
+    cat: "coffee",
+    desc: "Single origin Ethiopia, double shot, crema tebal dan aroma floral khas yang memanjakan hidung",
+    price: 28000,
+    tag: "Best Seller",
+  },
+  "caramel latte": {
+    cat: "coffee",
+    desc: "Susu oat segar, sirup karamel buatan sendiri, sea salt foam lembut di atasnya",
+    price: 42000,
+    tag: "Popular",
+  },
+  "matcha": {
+    cat: "coffee",
+    desc: "Matcha ceremonial grade dari Uji, ditambah espresso shot yang intens dan menggiurkan",
+    price: 45000,
+    tag: "New",
+  },
+  "brew float": {
+    cat: "coffee",
+    desc: "Cold brew 18 jam yang smooth, es krim vanilla bean premium, topping whipped cream segar",
+    price: 48000,
+    tag: null,
+  },
+  "rose corrado": {
+    cat: "coffee",
+    desc: "Espresso ristretto, air mawar segar, susu full cream steamed lembut — elegan di setiap tegukan",
+    price: 38000,
+    tag: "Spesial",
+  },
+  "cappucino": {
+    cat: "coffee",
+    desc: "Double shot espresso, busa susu lembut halus sempurna, sirup hazelnut premium Italia",
+    price: 40000,
+    tag: "Popular",
+  },
+  "milk tea": {
+    cat: "non-coffee",
+    desc: "Teh Thailand asli blend khusus, susu kental manis, tapioca pearl segar kenyal menyenangkan",
+    price: 35000,
+    tag: "Popular",
+  },
+  "lemonade": {
+    cat: "non-coffee",
+    desc: "Yuzu segar diperas langsung, sparkling water, madu asli, daun mint peppermint menyegarkan",
+    price: 32000,
+    tag: "Refreshing",
+  },
+  "taro": {
+    cat: "non-coffee",
+    desc: "Talas Okinawa pilihan, susu oat, swirl butterfly pea yang cantik berwarna ungu natural",
+    price: 42000,
+    tag: "New",
+  },
+  "mango smoothies": {
+    cat: "non-coffee",
+    desc: "Mangga Alphonso pilihan terbaik, yogurt Greek creamy, kapulaga, kelopak mawar harum",
+    price: 40000,
+    tag: null,
+  },
+  "strawberry": {
+    cat: "non-coffee",
+    desc: "Hojicha panggang beraroma kacang yang khas, susu segar, coulis stroberi alami segar merah",
+    price: 43000,
+    tag: "New",
+  },
+  "avocado toast": {
+    cat: "food",
+    desc: "Sourdough artisan panggang, alpukat smashed bumbu lemon, telur poached sempurna, micro herbs segar",
+    price: 65000,
+    tag: "Best Seller",
+  },
+  "truffle mushroom": {
+    cat: "food",
+    desc: "Ciabatta renyah garing, jamur liar tumis bawang putih, truffle oil mewah, parmesan shaved tipis",
+    price: 58000,
+    tag: null,
+  },
+  "acai power": {
+    cat: "food",
+    desc: "Acai blended kental, granola crunchy buatan sendiri, buah segar musiman, kelapa parut, madu lebah hutan",
+    price: 72000,
+    tag: "Healthy",
+  },
+  "croissat sandwich": {
+    cat: "food",
+    desc: "Croissant mentega segar dipanggang, turkey ham premium, brie leleh creamy, saus dijon pedas manis",
+    price: 55000,
+    tag: "Popular",
+  },
+  "nasi goreng truffle": {
+    cat: "food",
+    desc: "Nasi wangi premium dimasak wajan panas, truffle oil mewah, telur mata sapi runny, acar timun segar",
+    price: 68000,
+    tag: "Spesial",
+  },
+  "basque chesscake": {
+    cat: "dessert",
+    desc: "San Sebastian style autentik, bagian tengah creamy bergetar lembut, permukaan caramelized sempurna kehitaman",
+    price: 52000,
+    tag: "Best Seller",
+  },
+  "tiramisu": {
+    cat: "dessert",
+    desc: "Ladyfinger savoiardi ber-espresso kuat, krim mascarpone lembut mengembang, taburan cocoa premium Valrhona",
+    price: 48000,
+    tag: "Popular",
+  },
+  "matcha cake": {
+    cat: "dessert",
+    desc: "Lapisan sponge matcha halus bergantian, ganache dark chocolate 70% premium, butter cream matcha",
+    price: 55000,
+    tag: "New",
+  },
+  "brulee": {
+    cat: "dessert",
+    desc: "Custard vanilla pod Madagaskar klasik Prancis, kulit gula karamel renyah tipis dibakar langsung",
+    price: 45000,
+    tag: null,
+  },
+  "croissat butter": {
+    cat: "snack",
+    desc: "Berlapis mentega Prancis AOP pilihan, fermentasi 3 hari, dipanggang segar hangat setiap pagi hari",
+    price: 32000,
+    tag: "Best Seller",
+  },
+  "cheese scone": {
+    cat: "snack",
+    desc: "Scone hangat mengembang, keju cheddar matured tajam, krim clotted, selai stroberi buatan rumah",
+    price: 28000,
+    tag: null,
+  },
+  "banana muffin": {
+    cat: "snack",
+    desc: "Pisang cavendish matang manis, walnut panggang renyah, streusel brown sugar kasar bertekstur di atas",
+    price: 25000,
+    tag: "Popular",
+  },
+  "salmon baggel": {
+    cat: "snack",
+    desc: "Bagel sesame empuk, salmon smoked cold-smoked, cream cheese lembut, caper, dill segar harum",
+    price: 58000,
+    tag: "Spesial",
+  },
+};
+
+const menuItems = Object.entries(coffeImageModules)
+  .map(([path, url], idx) => {
+    const fileName = fileNameFromPath(path);
+    const meta = menuMetaByFileName[fileName.toLowerCase()] || {};
+
+    return {
+      id: idx + 1,
+      cat: meta.cat || "coffee",
+      name: fileName,
+      desc: meta.desc || "",
+      price: meta.price ?? null,
+      tag: meta.tag ?? null,
+      img: url,
+      cal: meta.cal || "",
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
 
 const catIcon = { coffee:"☕","non-coffee":"🧋",food:"🍽",dessert:"🍰",snack:"🥐" };
 const catLabel = { coffee:"Coffee","non-coffee":"Non-Coffee",food:"Makanan",dessert:"Dessert",snack:"Snack" };
@@ -221,6 +369,7 @@ function Modal({ item, onClose }){
   return (
     <div className="modal-bg" onClick={e=>{ if(e.target===e.currentTarget) onClose(); }}>
       <div className="modal">
+
         {/* Image */}
         <div className="modal-img">
           {item.img
@@ -237,16 +386,16 @@ function Modal({ item, onClose }){
         <div className="modal-body">
           {item.tag && <span className={`modal-tag ${tagCls[item.tag]||""}`}>{item.tag}</span>}
           <div className="modal-name serif">{item.name}</div>
-          <div className="modal-desc">{item.desc}</div>
+          {!!item.desc && <div className="modal-desc">{item.desc}</div>}
           <div className="modal-divider"/>
           <div className="modal-meta">
-            <div className="modal-price serif">{formatIDR(item.price)}</div>
+            <div className="modal-price serif">{item.price != null ? formatIDR(item.price) : ""}</div>
             <div className="modal-cal-wrap">
-              <div className="modal-cal">🔥 {item.cal}</div>
+              {!!item.cal && <div className="modal-cal">🔥 {item.cal}</div>}
               <div className="modal-cat">{catIcon[item.cat]} {catLabel[item.cat]}</div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
@@ -257,6 +406,7 @@ function Modal({ item, onClose }){
 function Card({ item, delay, onClick }){
   return (
     <div className="card" style={{ animationDelay:`${delay*45}ms` }} onClick={onClick}>
+
       <div className="iw">
         {item.img
           ? <img src={item.img} alt={item.name}/>
@@ -269,11 +419,13 @@ function Card({ item, delay, onClick }){
       </div>
       <div className="cb">
         <div className="cn serif">{item.name}</div>
-        <div className="cd">{item.desc}</div>
-        <div className="cf2">
-          <div className="cp serif">{formatIDR(item.price)}</div>
-          <div className="ccal">{item.cal}</div>
-        </div>
+        {!!item.desc && <div className="cd">{item.desc}</div>}
+        {(item.price != null || item.cal) && (
+          <div className="cf2">
+            {item.price != null && <div className="cp serif">{formatIDR(item.price)}</div>}
+            {!!item.cal && <div className="ccal">{item.cal}</div>}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -306,7 +458,7 @@ export default function CafeMenu(){
       <header className="hd">
         <div className="hd-in">
           <div>
-            <div className="logo-name">Maison Noir</div>
+            <div className="logo-name">Astakira cafe</div>
             <div className="logo-sub">Specialty Café</div>
           </div>
           <div className="sw">

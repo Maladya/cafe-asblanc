@@ -42,7 +42,8 @@ import red_velvet from "./assets/menu/Red Velvet.png";
 import straw_pink_as from "./assets/menu/straw pink as.png";
 import sweet_blanc from "./assets/menu/sweet blanc.png";
 import tea_corn from "./assets/menu/tea corn.png";
-
+import cireng from "./assets/menu/cireng.png";
+import spaghetti from "./assets/menu/spaghetti_carbonara.png";
 
 const DEFAULT_MENU_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
@@ -366,7 +367,7 @@ const menuData = [
     price: 28000,
     category: "Special Mood",
     // tag: ["Pasta"],
-    image: platter_as,
+    image: spaghetti,
   },
   {
     id: 36,
@@ -390,7 +391,7 @@ const menuData = [
     price: 16000,
     category: "Special Mood",
     // tag: ["Local", "Crispy"],
-    image: tahu_cabe_garam,
+    image: cireng,
   },
   {
     id: 38,
@@ -532,7 +533,7 @@ function MenuApp() {
           <div className="grid">
             {filtered.map((item) => (
               <div
-                key={item.id}
+                key={`${item.id}-${item.name}`}
                 className="card"
                 onClick={() => setSelectedItem(item)}
               >

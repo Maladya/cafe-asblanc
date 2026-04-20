@@ -1,32 +1,67 @@
 import { useEffect, useState } from "react";
 import QrPage from "./QrPage.jsx";
+import asblanc_logo from "./assets/asblanc.jpeg";
 
 // ============================================================
 // MAPPING GAMBAR BARU (dari data_baru.zip)
 // Tempatkan semua foto di folder: src/assets/menu/
 // Nama file sesuai dengan key di bawah ini
 // ============================================================
-import img_01_drink from "./assets/menu/01-drink-p1.png";
-import img_02_drink from "./assets/menu/02-drink-p2.png";
-import img_03_drink from "./assets/menu/03-drink-p3.png";
-import img_05_food from "./assets/menu/05-food-p2.png";
-import img_12_menu from "./assets/menu/12-menu-p1.png";
-import img_13_menu from "./assets/menu/13-menu-p2.png";
-import img_14_menu from "./assets/menu/14-menu-p3.png";
-import img_15_menu from "./assets/menu/15-menu-p4.png";
-import img_16_menu from "./assets/menu/16-menu-p5.png";
-import img_17_menu from "./assets/menu/17-menu-p6.png";
-import img_18_menu from "./assets/menu/18-menu-p7.png";
-import img_19_menu from "./assets/menu/19-menu-p8.png";
-import img_20_menu from "./assets/menu/20-menu-p9.png";
-import img_21_menu from "./assets/menu/21-menu-p10.png";
-import img_23_menu from "./assets/menu/23-menu-p12.png";
-import img_24_menu from "./assets/menu/24-menu-p13.png";
-import img_25_menu from "./assets/menu/25-menu-p14.png";
-import img_26_menu from "./assets/menu/26-menu-p15.png";
-import img_27_menu from "./assets/menu/27-menu-p16.png";
-import img_28_menu from "./assets/menu/28-menu-p17.png";
-import img_29_menu from "./assets/menu/29-menu-p18.png";
+
+import beef_rice_bowl from "./assets/menu/beef rice bowl.png";
+import berry_sweet_as from "./assets/menu/berry sweet as.png";
+import black_blanc from "./assets/menu/black blanc.png";
+import black_pink from "./assets/menu/black pink.png";
+import chese_roll_latte from "./assets/menu/chese rollLatte.png";
+import chicken_rice_bowl from "./assets/menu/chiken rice bowl.png";
+import coklat from "./assets/menu/Coklat.png";
+import kopi_susu_aren from "./assets/menu/Kopi Susu Aren.png";
+import kopi_susu_as from "./assets/menu/Kopi Susu As.png";
+import lemon_tea from "./assets/menu/lemon tea.png";
+import lychee_tea from "./assets/menu/lychee tea.png";
+import matcha_latte from "./assets/menu/Matcha Latte.png";
+import matcha from "./assets/menu/Matcha.png";
+import nasi_ayam_rempah from "./assets/menu/nasi ayam rempah.png";
+import nasi_goreng_cajo from "./assets/menu/nasi goreng cajo.png";
+import chiken_fire_wings from "./assets/menu/chiken_fire_wings.png";
+import churros_as from "./assets/menu/churros_as.png";
+import donut_as from "./assets/menu/donut_as.png";
+import iga_bakar from "./assets/menu/iga_bakar.png";
+import mie_goreng_as from "./assets/menu/mie_goreng_as.png";
+import nasi_ayam_bakar from "./assets/menu/nasi_ayam_bakar.png";
+import nasi_ayam_kremes from "./assets/menu/nasi_ayam_kremes.png";
+import nasi_goreng_as from "./assets/menu/nasi_goreng_as.png";
+import pisang_keju_as from "./assets/menu/pisang_keju_as.png";
+import pisang_keju_clasic from "./assets/menu/pisang_keju_clasic.png";
+import platter_as from "./assets/menu/platter_as.png";
+import sop_iga from "./assets/menu/sop_iga.png";
+import taichan from "./assets/menu/taichan.png";
+import tahu_cabe_garam from "./assets/menu/tahu_cabe_garam.png";
+import peach_tea from "./assets/menu/peach tea.png";
+import red_velvet from "./assets/menu/Red Velvet.png";
+import straw_pink_as from "./assets/menu/straw pink as.png";
+import sweet_blanc from "./assets/menu/sweet blanc.png";
+import tea_corn from "./assets/menu/tea corn.png";
+
+
+const DEFAULT_MENU_IMAGE =
+  "data:image/svg+xml;charset=UTF-8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#3b1f0e"/>
+          <stop offset="1" stop-color="#7b4a2b"/>
+        </linearGradient>
+      </defs>
+      <rect width="800" height="600" fill="url(#bg)"/>
+      <rect x="60" y="60" width="680" height="480" rx="28" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+      <g fill="#d4a843" font-family="Georgia, serif" text-anchor="middle">
+        <text x="400" y="300" font-size="40" font-weight="700">AS Blanc</text>
+        <text x="400" y="350" font-size="18" opacity="0.9"></text>
+      </g>
+    </svg>`
+  );
 
 // ============================================================
 // DATA MENU AS BLANC COFFEE & HOUSE
@@ -38,401 +73,379 @@ const menuData = [
     name: "Espresso",
     price: 18000,
     category: "Coffee",
-    tag: ["Hot", "Classic"],
-    description: "Espresso murni, bold dan intense untuk kamu yang suka kopi pekat.",
-    image: img_01_drink,
+    // tag: ["Hot", "Classic"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 2,
     name: "Americano",
     price: 22000,
     category: "Coffee",
-    tag: ["Hot", "Iced"],
-    description: "Espresso yang diencerkan dengan air panas, rasa kopi yang bersih dan ringan.",
-    image: img_01_drink,
+    tag: [ "Iced","Hot"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 3,
     name: "Magic Coffee",
     price: 26000,
     category: "Coffee",
-    tag: ["Hot", "Iced", "Signature"],
-    description: "Double ristretto dengan susu dingin — creamy, smooth, dan nendang.",
-    image: img_02_drink,
+    tag: ["Iced","Hot"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 4,
     name: "Cappucino",
     price: 26000,
     category: "Coffee",
-    tag: ["Hot", "Iced"],
-    description: "Espresso, steamed milk, dan foam tebal yang lembut di setiap tegukan.",
-    image: img_02_drink,
+    tag: ["Iced","Hot"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 5,
     name: "Caffe Latte",
     price: 24000,
     category: "Coffee",
-    tag: ["Hot", "Iced"],
-    description: "Perpaduan espresso dan susu segar yang halus dan creamy.",
-    image: img_03_drink,
+    tag: ["Iced","Hot"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 6,
     name: "Pop Brulée",
     price: 28000,
     category: "Coffee",
-    tag: ["Iced", "Signature"],
-    description: "Latte dengan sentuhan caramel brulée yang manis dan smoky.",
-    image: img_03_drink,
+    // tag: ["Iced", "Signature"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 7,
     name: "Coffee Lemon",
     price: 24000,
     category: "Coffee",
-    tag: ["Iced", "Refreshing"],
-    description: "Americano bertemu lemon segar — kombinasi unik yang menyegarkan.",
-    image: img_12_menu,
+    // tag: ["Iced", "Refreshing"],
+    image: DEFAULT_MENU_IMAGE,
   },
+  // ── Filter Coffee ───────────────────────────────────────────
   {
     id: 8,
     name: "Special Beans",
     price: 35000,
-    category: "Coffee",
-    tag: ["Hot", "Premium", "Single Origin"],
-    description: "Biji kopi pilihan premium, diseduh dengan metode terbaik untuk kamu.",
-    image: img_12_menu,
+    category: "Filter Coffee",
+    // tag: ["Hot", "Premium", "Single Origin"],
+    image: DEFAULT_MENU_IMAGE,
   },
   {
     id: 9,
     name: "Regular Beans",
     price: 28000,
-    category: "Coffee",
-    tag: ["Hot", "Manual Brew"],
-    description: "Kopi manual brew dengan biji berkualitas, cocok untuk penikmat sejati.",
-    image: img_13_menu,
+    category: "Filter Coffee",
+    // tag: ["Hot", "Manual Brew"],
+    image: DEFAULT_MENU_IMAGE,
   },
-
-  // ── NON-COFFEE ───────────────────────────────────────────
+  // ── Tea ───────────────────────────────────────────
   {
     id: 10,
-    name: "Red Velvet",
-    price: 26000,
-    category: "Non-Coffee",
-    tag: ["Iced", "Sweet"],
-    description: "Minuman berbasis red velvet yang kaya rasa dengan sentuhan creamy.",
-    image: img_13_menu,
+    name: "Lemon Tea",
+    price: 18000,
+    category: "Tea",
+    // tag: ["Iced", "Sweet"],
+    image: lemon_tea,
   },
   {
     id: 11,
-    name: "Matcha",
-    price: 26000,
-    category: "Non-Coffee",
-    tag: ["Hot", "Iced"],
-    description: "Matcha grade premium, earthy dan sedikit pahit, seimbang sempurna.",
-    image: img_14_menu,
+    name: "Lychee Tea",
+    price: 18000,
+    category: "Tea",
+    // tag: ["Hot", "Iced"],
+    image: lychee_tea,
   },
   {
     id: 12,
-    name: "Chocolatte",
-    price: 26000,
-    category: "Non-Coffee",
-    tag: ["Hot", "Iced"],
-    description: "Cokelat susu rich dan lembut, pilihan tepat untuk hari santai.",
-    image: img_14_menu,
+    name: "Peach Tea",
+    price: 18000,
+    category: "Tea",
+    // tag: ["Hot", "Iced"],
+    image: peach_tea,
   },
+  // ── NON-COFFEE ───────────────────────────────────────────
   {
     id: 13,
-    name: "Matcha AS Blanc",
-    price: 28000,
+    name: "Red Velvet",
+    price: 26000,
     category: "Non-Coffee",
-    tag: ["Iced", "Signature"],
-    description: "Matcha spesial ala AS Blanc dengan blend susu pilihan.",
-    image: img_15_menu,
+    // tag: ["Iced", "Sweet"],
+    image: red_velvet,
   },
   {
     id: 14,
-    name: "Kopi Susu Aren",
+    name: "Matcha",
     price: 26000,
     category: "Non-Coffee",
-    tag: ["Iced", "Local"],
-    description: "Kopi susu dengan gula aren asli, manis alami yang khas.",
-    image: img_15_menu,
+    // tag: ["Hot", "Iced"],
+    image: matcha,
   },
   {
     id: 15,
-    name: "Kopi Susu AS",
-    price: 28000,
+    name: "Chocolatte",
+    price: 26000,
     category: "Non-Coffee",
-    tag: ["Iced", "Signature"],
-    description: "Racikan kopi susu andalan AS Blanc, creamy dengan rasa yang balanced.",
-    image: img_16_menu,
+    // tag: ["Hot", "Iced"],
+    image: coklat,
   },
   {
     id: 16,
-    name: "Peach Tea",
-    price: 18000,
+    name: "Matcha AS Blanc",
+    price: 28000,
     category: "Non-Coffee",
-    tag: ["Iced", "Fruity"],
-    description: "Teh segar dengan aroma dan rasa peach yang manis menyegarkan.",
-    image: img_16_menu,
+    // tag: ["Iced", "Signature"],
+    image: matcha_latte,
   },
+  // ── Milk Based ───────────────────────────────────────────
   {
     id: 17,
-    name: "Lemon Tea",
-    price: 18000,
-    category: "Non-Coffee",
-    tag: ["Iced", "Refreshing"],
-    description: "Teh dengan perasan lemon segar, asam manis yang pas.",
-    image: img_17_menu,
+    name: "Kopi Susu Aren",
+    price: 26000,
+    category: "Milk Based",
+    // tag: ["Iced", "Local"],
+    image: kopi_susu_aren,
   },
   {
     id: 18,
-    name: "Lychee Tea",
-    price: 18000,
-    category: "Non-Coffee",
-    tag: ["Iced", "Fruity"],
-    description: "Teh beraroma lychee yang ringan dan menyegarkan di hari panas.",
-    image: img_17_menu,
+    name: "Kopi Susu AS",
+    price: 28000,
+    category: "Milk Based",
+    // tag: ["Iced", "Signature"],
+    image: kopi_susu_as,
   },
-
   // ── SIGNATURE DRINK ──────────────────────────────────────
   {
     id: 19,
     name: "Straw Pink AS",
     price: 26000,
-    category: "Signature",
-    tag: ["Iced", "Signature", "Instagram-Worthy"],
-    description: "Minuman signature pink yang cantik dan segar, favorit para pelanggan.",
-    image: img_18_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Signature", "Instagram-Worthy"],
+    image: straw_pink_as,
   },
   {
     id: 20,
     name: "Black Blanc",
     price: 28000,
-    category: "Signature",
-    tag: ["Iced", "Signature"],
-    description: "Minuman hitam misterius dengan rasa bold yang tak terlupakan.",
-    image: img_18_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Signature"],
+    image: black_blanc,
   },
   {
     id: 21,
     name: "Tea Corn",
     price: 26000,
-    category: "Signature",
-    tag: ["Iced", "Unique"],
-    description: "Perpaduan unik teh dan jagung manis, surprisingly delicious!",
-    image: img_19_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Unique"],
+    image: tea_corn,
   },
   {
     id: 22,
     name: "Berry Sweet AS",
     price: 28000,
-    category: "Signature",
-    tag: ["Iced", "Signature", "Fruity"],
-    description: "Mixed berry yang manis dan segar dalam satu gelas cantik.",
-    image: img_19_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Signature", "Fruity"],
+    image: berry_sweet_as,
   },
   {
     id: 23,
     name: "Black Pink",
     price: 28000,
-    category: "Signature",
-    tag: ["Iced", "Signature"],
-    description: "Kontras hitam dan pink yang dramatis — enak dan instagrammable.",
-    image: img_20_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Signature"],
+    image: black_pink,
   },
   {
     id: 24,
     name: "Sweet Blanc",
     price: 26000,
-    category: "Signature",
-    tag: ["Iced", "Signature"],
-    description: "Signature drink AS Blanc yang lembut, manis, dan creamy sempurna.",
-    image: img_20_menu,
+    category: "Signature Drink",
+    // tag: ["Iced", "Signature"],
+    image: sweet_blanc,
   },
-
-  // ── FOOD ─────────────────────────────────────────────────
+  // ── MAIN COURSE ─────────────────────────────────────────────────
   {
     id: 25,
     name: "Nasi Goreng AS",
     price: 28000,
-    category: "Food",
-    tag: ["Rice", "Best Seller"],
-    description: "Nasi goreng racikan AS Blanc dengan bumbu rahasia yang khas dan lezat.",
-    image: img_05_food,
+    category: "Main Corse",
+    // tag: ["Rice", "Best Seller"],
+    image: nasi_goreng_as,
   },
   {
     id: 26,
     name: "Nasi Goreng Cajo",
     price: 28000,
-    category: "Food",
-    tag: ["Rice", "Spicy"],
-    description: "Nasi goreng dengan cabe rawit hijau ala Cajo, pedas dan nagih.",
-    image: img_05_food,
+    category: "Main Corse",
+    // tag: ["Rice", "Spicy"],
+    image: nasi_goreng_cajo,
   },
   {
     id: 27,
     name: "Mie Goreng AS",
     price: 26000,
-    category: "Food",
-    tag: ["Noodle"],
-    description: "Mie goreng dengan bumbu spesial AS Blanc, gurih dan menggugah selera.",
-    image: img_21_menu,
+    category: "Main Corse",
+    // tag: ["Noodle"],
+    image: mie_goreng_as,
   },
+
+  // ── House Favorites  ─────────────────────────────────────────────────
   {
     id: 28,
-    name: "Sop Iga",
-    price: 48000,
-    category: "Food",
-    tag: ["Soup", "Premium"],
-    description: "Iga sapi empuk dalam kuah kaldu bening yang kaya rempah.",
-    image: img_21_menu,
-  },
-  {
-    id: 29,
     name: "Iga Bakar",
     price: 48000,
-    category: "Food",
-    tag: ["Grilled", "Premium"],
-    description: "Iga bakar dengan marinasi bumbu spesial, smoky dan juicy sempurna.",
-    image: img_23_menu,
+    category: "House Favorites",
+    tag: ["Iga Bakar", "Nasi","Sop kaldu","Sambal"],
+    image: iga_bakar,
+  },
+  // ── Hot Meals  ─────────────────────────────────────────────────
+  {
+    id: 29,
+    name: "Sop Iga",
+    price: 48000,
+    category: "Hot Meals",
+    tag: ["Sop Iga", "Nasi", "Krupuk", "Sambal"],
+    image: sop_iga,
   },
   {
     id: 30,
-    name: "Nasi Timbel Ayam Kremes",
-    price: 48000,
-    category: "Food",
-    tag: ["Rice", "Traditional"],
-    description: "Nasi timbel lengkap dengan ayam kremes renyah dan lauk pelengkap.",
-    image: img_23_menu,
+    name: "Taichan",
+    price: 26000,
+    category: "Hot Meals",
+    tag: ["Ayam Taichan", "Nasi"],
+    image: taichan,
   },
+  // ── Nusantara  ─────────────────────────────────────────────────
   {
     id: 31,
-    name: "Nasi Timbel Ayam Bakar",
+    name: "Nasi Timbel Ayam Kremes",
     price: 48000,
-    category: "Food",
-    tag: ["Rice", "Grilled"],
-    description: "Nasi timbel dengan ayam bakar bumbu tradisional yang meresap sempurna.",
-    image: img_24_menu,
+    category: "Nusantara",
+    tag: ["Nasi Timbel", "Ayam Kremes", "Tahu", "Cipe"],
+    image: nasi_ayam_kremes,
   },
   {
     id: 32,
-    name: "Taichan Ayam",
-    price: 26000,
-    category: "Food",
-    tag: ["Spicy", "Popular"],
-    description: "Ayam taichan gaya AS Blanc — pedas, asam, dan bikin nagih.",
-    image: img_24_menu,
+    name: "Nasi Timbel Ayam Bakar",
+    price: 48000,
+    category: "Nusantara",
+    tag: ["Nasi Timbel", "Ayam Bakar", "Tahu", "Cipe"],
+    image: nasi_ayam_bakar,
   },
+  {
+    id: 33,
+    name: "Nasi Ayam Rempah",
+    price: 35000,
+    category: "Nusantara",
+    tag: ["Nasi", "Ayam Rempah", "Kol goreng"],
+    image: nasi_ayam_rempah,
+  },
+  // ── Bowl Series  ─────────────────────────────────────────────────
   {
     id: 33,
     name: "Chicken Rice Bowl",
     price: 26000,
-    category: "Food",
-    tag: ["Rice Bowl"],
-    description: "Rice bowl ayam dengan saus pilihan di atas nasi putih hangat.",
-    image: img_25_menu,
+    category: "Bowl Series",
+    // tag: ["Rice Bowl"],
+    image: chicken_rice_bowl,
   },
   {
     id: 34,
     name: "Beef Rice Bowl",
     price: 28000,
-    category: "Food",
-    tag: ["Rice Bowl", "Premium"],
-    description: "Irisan daging sapi lembut dengan saus teriyaki di atas nasi panas.",
-    image: img_25_menu,
+    category: "Bowl Series",
+    // tag: ["Rice Bowl", "Premium"],
+    image: beef_rice_bowl,
   },
+  // ── Special Mood  ─────────────────────────────────────────────────
   {
     id: 35,
     name: "Spaghetti Carbonara",
     price: 28000,
-    category: "Food",
-    tag: ["Pasta"],
-    description: "Spaghetti creamy ala carbonara dengan bacon dan parmesan pilihan.",
-    image: img_26_menu,
+    category: "Special Mood",
+    // tag: ["Pasta"],
+    image: platter_as,
   },
   {
     id: 36,
     name: "AS Platter",
     price: 36000,
-    category: "Food",
-    tag: ["Sharing", "Best Seller"],
-    description: "Platter berbagi khas AS Blanc — aneka snack dan lauk dalam satu nampan.",
-    image: img_26_menu,
+    category: "Special Mood",
+    tag: ["Chiken Wings", "Onion Rings","Kentang Goreng","Sosis Goreng"],
+    image: platter_as,
   },
-
-  // ── SNACK ────────────────────────────────────────────────
   {
-    id: 37,
+    id: 36,
     name: "Tahu Cabe Garam",
     price: 16000,
-    category: "Snack",
-    tag: ["Spicy", "Local"],
-    description: "Tahu goreng crispy dengan taburan cabe dan garam yang gurih.",
-    image: img_27_menu,
+    category: "Special Mood",
+    // tag: ["Spicy", "Local"],
+    image: tahu_cabe_garam,
+  },
+  {
+    id: 37,
+    name: "Cireng",
+    price: 16000,
+    category: "Special Mood",
+    // tag: ["Local", "Crispy"],
+    image: tahu_cabe_garam,
   },
   {
     id: 38,
-    name: "Cireng",
-    price: 16000,
-    category: "Snack",
-    tag: ["Local", "Crispy"],
-    description: "Cireng aci goreng renyah di luar, kenyal di dalam, cocok buat ngemil.",
-    image: img_27_menu,
-  },
-  {
-    id: 39,
     name: "Fire Wings",
     price: 26000,
-    category: "Snack",
-    tag: ["Spicy", "Chicken"],
-    description: "Sayap ayam crispy dengan saus pedas menyala yang bikin keringetan.",
-    image: img_28_menu,
+    category: "Special Mood",
+    // tag: ["Spicy", "Chicken"],
+    image: chiken_fire_wings,
   },
+  // ── SNACK ────────────────────────────────────────────────
   {
-    id: 40,
+    id: 39,
     name: "Pisang Goreng Classic",
     price: 18000,
     category: "Snack",
-    tag: ["Sweet", "Traditional"],
-    description: "Pisang goreng klasik yang renyah di luar dan lembut manis di dalam.",
-    image: img_28_menu,
+    // tag: ["Sweet", "Traditional"],
+    image: pisang_keju_clasic,
   },
   {
-    id: 41,
+    id: 39,
     name: "Pisang Keju AS",
     price: 20000,
     category: "Snack",
-    tag: ["Sweet", "Cheese"],
-    description: "Pisang goreng dengan lelehan keju melted di atasnya, comfort snack terbaik.",
-    image: img_29_menu,
+    // tag: ["Sweet", "Cheese"],
+    image: pisang_keju_as,
   },
   {
-    id: 42,
+    id: 40,
     name: "Donut AS",
     price: 16000,
     category: "Snack",
-    tag: ["Sweet", "Baked"],
-    description: "Donut lembut khas AS Blanc dengan topping gula halus dan glaze.",
-    image: img_29_menu,
+    // tag: ["Sweet", "Baked"],
+    image: donut_as,
   },
   {
-    id: 43,
+    id: 41,
     name: "Churros",
     price: 20000,
     category: "Snack",
-    tag: ["Sweet", "Crispy"],
-    description: "Churros renyah dengan taburan gula kayu manis, cocok buat kamu yang suka manis.",
-    image: img_29_menu,
+    // tag: ["Sweet", "Crispy"],
+    image: churros_as,
+  },
+  {
+    id: 41,
+    name: "Cheese Roll",
+    price: 22000,
+    category: "Snack",
+    // tag: ["Sweet", "Crispy"],
+    image: chese_roll_latte,
   },
 ];
 
 // KATEGORI
 // ============================================================
-const categories = ["All", "Coffee", "Non-Coffee", "Signature", "Food", "Snack"];
+const categories = ["All", "Coffee", "Filter Coffee", "Tea","Non-Coffee","Milk Based", "Signature Drink", "Main Corse", "House Favorites","Hot Meals","Nusantara","Bowl Series","Special Mood","Snack"];
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", minimumFractionDigits: 0 }).format(price);
@@ -456,12 +469,17 @@ function MenuApp() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedItem, setSelectedItem] = useState(null);
+  const [viewerSrc, setViewerSrc] = useState(null);
+
+  const onMenuImageError = (e) => {
+    e.currentTarget.onerror = null;
+    e.currentTarget.src = DEFAULT_MENU_IMAGE;
+  };
 
   const filtered = menuData.filter((item) => {
     const matchCat = activeCategory === "All" || item.category === activeCategory;
     const matchSearch =
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+      item.name.toLowerCase().includes(searchQuery.toLowerCase());
     return matchCat && matchSearch;
   });
 
@@ -470,10 +488,7 @@ function MenuApp() {
       {/* ── HEADER ── */}
       <header className="header">
         <div className="header-inner">
-          <div className="brand">
-            <span className="brand-main">AS Blanc</span>
-            <span className="brand-sub">Coffee &amp; House</span>
-          </div>
+          <img src={asblanc_logo} alt="AS Blanc Coffee & House" className="header-logo" />
           <p className="brand-tagline">Where Every Sip Tells a Story</p>
         </div>
       </header>
@@ -522,17 +537,23 @@ function MenuApp() {
                 onClick={() => setSelectedItem(item)}
               >
                 <div className="card-img-wrap">
-                  <img src={item.image} alt={item.name} className="card-img" />
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="card-img mb-20"
+                    onError={onMenuImageError}
+                  />
                   <span className="card-category">{item.category}</span>
                 </div>
                 <div className="card-body">
                   <h3 className="card-name">{item.name}</h3>
-                  <p className="card-desc">{item.description}</p>
-                  <div className="card-tags">
-                    {item.tag.map((t) => (
-                      <span key={t} className="tag">{t}</span>
-                    ))}
-                  </div>
+                  {Array.isArray(item.tag) && item.tag.length > 0 && (
+                    <div className="card-tags">
+                      {item.tag.map((t) => (
+                        <span key={t} className="tag">{t}</span>
+                      ))}
+                    </div>
+                  )}
                   <p className="card-price">{formatPrice(item.price)}</p>
                 </div>
               </div>
@@ -546,18 +567,40 @@ function MenuApp() {
         <div className="modal-overlay" onClick={() => setSelectedItem(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setSelectedItem(null)}>✕</button>
-            <img src={selectedItem.image} alt={selectedItem.name} className="modal-img" />
+            <img
+              src={selectedItem.image}
+              alt={selectedItem.name}
+              className="modal-img"
+              onError={onMenuImageError}
+              onClick={() => setViewerSrc(selectedItem.image)}
+            />
             <div className="modal-body">
               <span className="modal-cat">{selectedItem.category}</span>
               <h2 className="modal-name">{selectedItem.name}</h2>
-              <p className="modal-desc">{selectedItem.description}</p>
-              <div className="modal-tags">
-                {selectedItem.tag.map((t) => (
-                  <span key={t} className="tag">{t}</span>
-                ))}
-              </div>
+              {Array.isArray(selectedItem.tag) && selectedItem.tag.length > 0 && (
+                <div className="modal-tags">
+                  {selectedItem.tag.map((t) => (
+                    <span key={t} className="tag"><div className="tag-text">{t}</div></span>
+                  ))}
+                </div>
+              )}
+              
               <p className="modal-price">{formatPrice(selectedItem.price)}</p>
             </div>
+          </div>
+        </div>
+      )}
+
+      {viewerSrc && (
+        <div className="viewer-overlay" onClick={() => setViewerSrc(null)}>
+          <div className="viewer" onClick={(e) => e.stopPropagation()}>
+            <button className="viewer-close" onClick={() => setViewerSrc(null)}>✕</button>
+            <img
+              src={viewerSrc}
+              alt=""
+              className="viewer-img"
+              onError={onMenuImageError}
+            />
           </div>
         </div>
       )}
@@ -582,31 +625,27 @@ function MenuApp() {
 
         /* HEADER */
         .header {
-          background: linear-gradient(135deg, var(--brown-dark) 0%, var(--brown-mid) 100%);
-          padding: 32px 20px 24px;
+          background: #ffffff;
+          padding: 24px 20px 18px;
           text-align: center;
+          border-bottom: 1px solid rgba(196,149,106,0.3);
+          box-shadow: 0 2px 16px rgba(59,31,14,0.07);
         }
-        .brand { display: flex; align-items: baseline; justify-content: center; gap: 10px; }
-        .brand-main {
-          font-size: 2.4rem;
-          font-weight: 700;
-          color: var(--gold);
-          letter-spacing: 2px;
-          font-family: 'Georgia', serif;
-        }
-        .brand-sub {
-          font-size: 1rem;
-          color: rgba(255,255,255,0.75);
-          letter-spacing: 3px;
-          text-transform: uppercase;
-          font-family: 'Georgia', serif;
+        .header-logo {
+          height: 80px;
+          width: auto;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto;
+          mix-blend-mode: multiply;
         }
         .brand-tagline {
-          color: rgba(255,255,255,0.5);
-          font-size: 0.8rem;
-          margin-top: 6px;
-          letter-spacing: 1px;
+          color: var(--brown-mid);
+          font-size: 0.78rem;
+          margin-top: 8px;
+          letter-spacing: 2px;
           font-style: italic;
+          opacity: 0.7;
         }
 
         /* SEARCH */
@@ -788,7 +827,7 @@ function MenuApp() {
           z-index: 10;
           backdrop-filter: blur(4px);
         }
-        .modal-img { width: 100%; height: 240px; object-fit: cover; display: block; }
+        .modal-img { width: 100%; height: 320px; object-fit: cover; display: block; cursor: zoom-in; }
         .modal-body { padding: 20px; }
         .modal-cat {
           display: inline-block;
@@ -806,6 +845,49 @@ function MenuApp() {
         .modal-desc { font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 12px; }
         .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
         .modal-price { font-size: 1.5rem; font-weight: 700; color: var(--brown-mid); }
+
+        /* IMAGE VIEWER */
+        .viewer-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.75);
+          z-index: 200;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 16px;
+          backdrop-filter: blur(6px);
+        }
+        .viewer {
+          position: relative;
+          width: min(980px, 100%);
+          max-height: 90vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .viewer-img {
+          width: 100%;
+          max-height: 90vh;
+          object-fit: contain;
+          border-radius: 16px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+          background: rgba(255,255,255,0.04);
+        }
+        .viewer-close {
+          position: absolute;
+          top: -10px;
+          right: -10px;
+          background: rgba(0,0,0,0.55);
+          border: none;
+          color: white;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 0.95rem;
+          backdrop-filter: blur(4px);
+        }
       `}</style>
     </div>
   );

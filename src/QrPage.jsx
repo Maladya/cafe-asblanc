@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import * as QRCode from "qrcode";
 
 export default function QrPage() {
-  const [value, setValue] = useState("https://localhost:5173");
+  const [value, setValue] = useState("http://cafe-asblanc.mycafe-order.net/");
   const [size, setSize] = useState(512);
   const [dataUrl, setDataUrl] = useState("");
   const [err, setErr] = useState("");

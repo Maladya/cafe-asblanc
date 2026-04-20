@@ -30,7 +30,6 @@ import iga_bakar from "./assets/menu/iga_bakar.png";
 import mie_goreng_as from "./assets/menu/mie_goreng_as.png";
 import nasi_ayam_bakar from "./assets/menu/nasi_ayam_bakar.png";
 import nasi_ayam_kremes from "./assets/menu/nasi_ayam_kremes.png";
-import nasi_goreng_as from "./assets/menu/nasi_goreng_as.png";
 import pisang_keju_as from "./assets/menu/pisang_keju_as.png";
 import pisang_keju_clasic from "./assets/menu/pisang_keju_clasic.png";
 import platter_as from "./assets/menu/platter_as.png";
@@ -44,6 +43,13 @@ import sweet_blanc from "./assets/menu/sweet blanc.png";
 import tea_corn from "./assets/menu/tea corn.png";
 import cireng from "./assets/menu/cireng.png";
 import spaghetti from "./assets/menu/spaghetti_carbonara.png";
+import pop_brule from "./assets/menu/POP BRULEE.png";
+import nasi_goreng_as from "./assets/menu/NASI GORENG AS.png";
+import coffe_lemon from "./assets/menu/COFFE_LEMON.png";
+import magic_coffe from "./assets/menu/MAGIC_COFFE.png";
+import americano from "./assets/menu/AMERICANO.png";  
+import latte from "./assets/menu/COFFE.jpg"
+
 
 const DEFAULT_MENU_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
@@ -83,7 +89,7 @@ const menuData = [
     price: 22000,
     category: "Coffee",
     tag: [ "Iced","Hot"],
-    image: DEFAULT_MENU_IMAGE,
+    image: americano,
   },
   {
     id: 3,
@@ -91,7 +97,7 @@ const menuData = [
     price: 26000,
     category: "Coffee",
     tag: ["Iced","Hot"],
-    image: DEFAULT_MENU_IMAGE,
+    image: magic_coffe,
   },
   {
     id: 4,
@@ -99,7 +105,7 @@ const menuData = [
     price: 26000,
     category: "Coffee",
     tag: ["Iced","Hot"],
-    image: DEFAULT_MENU_IMAGE,
+    image: latte,
   },
   {
     id: 5,
@@ -107,7 +113,7 @@ const menuData = [
     price: 24000,
     category: "Coffee",
     tag: ["Iced","Hot"],
-    image: DEFAULT_MENU_IMAGE,
+    image: latte,
   },
   {
     id: 6,
@@ -115,7 +121,7 @@ const menuData = [
     price: 28000,
     category: "Coffee",
     // tag: ["Iced", "Signature"],
-    image: DEFAULT_MENU_IMAGE,
+    image: pop_brule  ,
   },
   {
     id: 7,
@@ -123,7 +129,7 @@ const menuData = [
     price: 24000,
     category: "Coffee",
     // tag: ["Iced", "Refreshing"],
-    image: DEFAULT_MENU_IMAGE,
+    image: coffe_lemon,
   },
   // ── Filter Coffee ───────────────────────────────────────────
   {
@@ -612,10 +618,10 @@ function MenuApp() {
 
         :root {
           --cream: #faf6f0;
-          --brown-dark: #3b1f0e;
-          --brown-mid: #7b4a2b;
-          --brown-light: #c4956a;
-          --gold: #d4a843;
+          --brown-dark: #1F4D3A;
+          --brown-mid: #1F4D3A;
+          --brown-light: #1F4D3A;
+          --gold: #1F4D3A;
           --white: #ffffff;
           --gray: #888;
           --text: #2d1b0e;

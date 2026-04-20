@@ -50,20 +50,19 @@ import magic_coffe from "./assets/menu/MAGIC_COFFE.png";
 import americano from "./assets/menu/AMERICANO.png";  
 import latte from "./assets/menu/COFFE.jpg"
 
-
 const DEFAULT_MENU_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
   encodeURIComponent(
     `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
       <defs>
         <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#3b1f0e"/>
-          <stop offset="1" stop-color="#7b4a2b"/>
+          <stop offset="0" stop-color="#5A5B47"/>
+          <stop offset="1" stop-color="#3E3F31"/>
         </linearGradient>
       </defs>
       <rect width="800" height="600" fill="url(#bg)"/>
       <rect x="60" y="60" width="680" height="480" rx="28" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
-      <g fill="#d4a843" font-family="Georgia, serif" text-anchor="middle">
+      <g fill="#E8DEB8" font-family="Georgia, serif" text-anchor="middle">
         <text x="400" y="300" font-size="40" font-weight="700">AS Blanc</text>
         <text x="400" y="350" font-size="18" opacity="0.9"></text>
       </g>
@@ -617,14 +616,14 @@ function MenuApp() {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --cream: #5A5B47;
-          --brown-dark: #3E3F31;
-          --brown-mid: #A89F7A;
-          --brown-light: #A89F7A;
-          --gold: #E8DEB8;
+          --cream: #faf6f0;
+          --brown-dark: #3b1f0e;
+          --brown-mid: #7b4a2b;
+          --brown-light: #c4956a;
+          --gold: #d4a843;
           --white: #ffffff;
           --gray: #888;
-          --text: #E8DEB8;
+          --text: #2d1b0e;
           --shadow: 0 4px 20px rgba(59,31,14,0.12);
         }
 
@@ -632,10 +631,10 @@ function MenuApp() {
 
         /* HEADER */
         .header {
-          background: var(--cream);
+          background: #ffffff;
           padding: 24px 20px 18px;
           text-align: center;
-          border-bottom: 1px solid rgba(232, 222, 184, 0.25);
+          border-bottom: 1px solid rgba(196,149,106,0.3);
           box-shadow: 0 2px 16px rgba(59,31,14,0.07);
         }
         .header-logo {

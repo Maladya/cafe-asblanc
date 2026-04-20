@@ -617,14 +617,14 @@ function MenuApp() {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --cream: #faf6f0;
-          --brown-dark: #1F4D3A;
-          --brown-mid: #1F4D3A;
-          --brown-light: #1F4D3A;
-          --gold: #1F4D3A;
+          --cream: #5A5B47;
+          --brown-dark: #3E3F31;
+          --brown-mid: #A89F7A;
+          --brown-light: #A89F7A;
+          --gold: #E8DEB8;
           --white: #ffffff;
           --gray: #888;
-          --text: #2d1b0e;
+          --text: #E8DEB8;
           --shadow: 0 4px 20px rgba(59,31,14,0.12);
         }
 
@@ -632,10 +632,10 @@ function MenuApp() {
 
         /* HEADER */
         .header {
-          background: #ffffff;
+          background: var(--cream);
           padding: 24px 20px 18px;
           text-align: center;
-          border-bottom: 1px solid rgba(196,149,106,0.3);
+          border-bottom: 1px solid rgba(232, 222, 184, 0.25);
           box-shadow: 0 2px 16px rgba(59,31,14,0.07);
         }
         .header-logo {

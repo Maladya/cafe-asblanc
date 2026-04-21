@@ -668,10 +668,11 @@ function MenuApp() {
           border: 2px solid var(--brown-light);
           background: var(--white);
           font-size: 0.95rem;
-          color: var(--text);
+          color: var(--brown-dark);
           outline: none;
           transition: border-color 0.2s;
         }
+        .search-input::placeholder { color: rgba(62,63,49,0.55); }
         .search-input:focus { border-color: var(--brown-mid); }
         .search-clear {
           position: absolute;
@@ -748,7 +749,7 @@ function MenuApp() {
           position: absolute;
           top: 8px;
           left: 8px;
-          background: rgba(62,63,49,0.85);
+          background: rgba(62,63,49,0.92);
           color: var(--gold);
           font-size: 0.65rem;
           padding: 3px 8px;
@@ -773,18 +774,19 @@ function MenuApp() {
         }
         .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
         .tag {
-          background: rgba(232, 222, 184, 0.12);
-          color: var(--brown-mid);
+          background: rgba(62,63,49,0.14);
+          color: rgba(62,63,49,0.92);
           font-size: 0.62rem;
           padding: 2px 7px;
           border-radius: 50px;
           font-weight: 600;
-          border: 1px solid rgba(232, 222, 184, 0.22);
+          border: 1px solid rgba(62,63,49,0.28);
         }
+        .tag-text { color: inherit; }
         .card-price {
           font-size: 1rem;
           font-weight: 700;
-          color: var(--brown-mid);
+          color: var(--brown-dark);
         }
 
         /* EMPTY */
@@ -850,7 +852,7 @@ function MenuApp() {
         .modal-name { font-size: 1.4rem; font-weight: 700; color: var(--brown-dark); margin-bottom: 8px; }
         .modal-desc { font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 12px; }
         .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-        .modal-price { font-size: 1.5rem; font-weight: 700; color: var(--brown-mid); }
+        .modal-price { font-size: 1.5rem; font-weight: 700; color: var(--brown-dark); }
 
         /* IMAGE VIEWER */
         .viewer-overlay {

@@ -12,7 +12,7 @@ import beef_rice_bowl from "./assets/menu/beef rice bowl.png";
 import berry_sweet_as from "./assets/menu/berry sweet as.png";
 import black_blanc from "./assets/menu/black blanc.png";
 import black_pink from "./assets/menu/black pink.png";
-import chese_roll_latte from "./assets/menu/chese rollLatte.png";
+import chese_roll_latte from "./assets/menu/cheese roll.png";
 import chicken_rice_bowl from "./assets/menu/chiken rice bowl.png";
 import coklat from "./assets/menu/Coklat.png";
 import kopi_susu_aren from "./assets/menu/Kopi Susu Aren.png";
@@ -324,22 +324,22 @@ const menuData = [
     image: taichan,
   },
   // ── Nusantara  ─────────────────────────────────────────────────
-  {
-    id: 31,
-    name: "Nasi Timbel Ayam Kremes",
-    price: 48000,
-    category: "Nusantara",
-    tag: ["Nasi Timbel", "Ayam Kremes", "Tahu", "Cipe"],
-    image: nasi_ayam_kremes,
-  },
-  {
-    id: 32,
-    name: "Nasi Timbel Ayam Bakar",
-    price: 48000,
-    category: "Nusantara",
-    tag: ["Nasi Timbel", "Ayam Bakar", "Tahu", "Cipe"],
-    image: nasi_ayam_bakar,
-  },
+  // {
+  //   id: 31,
+  //   name: "Nasi Timbel Ayam Kremes",
+  //   price: 48000,
+  //   category: "Nusantara",
+  //   tag: ["Nasi Timbel", "Ayam Kremes", "Tahu", "Cipe"],
+  //   image: nasi_ayam_kremes,
+  // },
+  // {
+  //   id: 32,
+  //   name: "Nasi Timbel Ayam Bakar",
+  //   price: 48000,
+  //   category: "Nusantara",
+  //   tag: ["Nasi Timbel", "Ayam Bakar", "Tahu", "Cipe"],
+  //   image: nasi_ayam_bakar,
+  // },
   {
     id: 33,
     name: "Nasi Ayam Rempah",

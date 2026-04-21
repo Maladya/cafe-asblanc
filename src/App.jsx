@@ -616,26 +616,26 @@ function MenuApp() {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --cream: #faf6f0;
-          --brown-dark: #3b1f0e;
-          --brown-mid: #7b4a2b;
-          --brown-light: #c4956a;
-          --gold: #d4a843;
+          --cream: #5A5B47;
+          --brown-dark: #3E3F31;
+          --brown-mid: #E8DEB8;
+          --brown-light: #A89F7A;
+          --gold: #E8DEB8;
           --white: #ffffff;
           --gray: #888;
-          --text: #2d1b0e;
-          --shadow: 0 4px 20px rgba(59,31,14,0.12);
+          --text: #E8DEB8;
+          --shadow: 0 4px 20px rgba(62,63,49,0.18);
         }
 
         body { background: var(--cream); font-family: 'Georgia', serif; color: var(--text); }
 
         /* HEADER */
         .header {
-          background: #ffffff;
+          background: var(--cream);
           padding: 24px 20px 18px;
           text-align: center;
-          border-bottom: 1px solid rgba(196,149,106,0.3);
-          box-shadow: 0 2px 16px rgba(59,31,14,0.07);
+          border-bottom: 1px solid rgba(232, 222, 184, 0.18);
+          box-shadow: 0 2px 16px rgba(0,0,0,0.18);
         }
         .header-logo {
           height: 80px;
@@ -740,7 +740,7 @@ function MenuApp() {
           cursor: pointer;
           transition: transform 0.2s, box-shadow 0.2s;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(59,31,14,0.18); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(62,63,49,0.18); }
 
         .card-img-wrap { position: relative; }
         .card-img { width: 100%; height: 160px; object-fit: cover; display: block; }
@@ -748,7 +748,7 @@ function MenuApp() {
           position: absolute;
           top: 8px;
           left: 8px;
-          background: rgba(59,31,14,0.8);
+          background: rgba(62,63,49,0.85);
           color: var(--gold);
           font-size: 0.65rem;
           padding: 3px 8px;
@@ -773,13 +773,13 @@ function MenuApp() {
         }
         .card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
         .tag {
-          background: #fef3e2;
+          background: rgba(232, 222, 184, 0.12);
           color: var(--brown-mid);
           font-size: 0.62rem;
           padding: 2px 7px;
           border-radius: 50px;
           font-weight: 600;
-          border: 1px solid #f0d9b5;
+          border: 1px solid rgba(232, 222, 184, 0.22);
         }
         .card-price {
           font-size: 1rem;

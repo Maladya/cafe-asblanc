@@ -49,6 +49,7 @@ import coffe_lemon from "./assets/menu/COFFE_LEMON.png";
 import magic_coffe from "./assets/menu/MAGIC_COFFE.png";
 import americano from "./assets/menu/AMERICANO.png";  
 import latte from "./assets/menu/COFFE.jpg"
+import late from "./assets/menu/late.png"
 
 const DEFAULT_MENU_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
@@ -108,11 +109,11 @@ const menuData = [
   },
   {
     id: 5,
-    name: "Caffe Latte",
+    name: "Coffe Latte",
     price: 24000,
     category: "Coffee",
     tag: ["Iced","Hot"],
-    image: latte,
+    image: late,
   },
   {
     id: 6,
